@@ -13,4 +13,14 @@ public class DoubleHashingHashMapTest extends OpenAddressHashMapTest {
     public OpenAddressHashMap getOpenAddressHashMap(int capacity) {
         return new DoubleHashingHashMap(capacity);
     }
+
+    @Override
+    protected OpenAddressHashMap getOpenAddressHashMap(double loadFactor) {
+        return new DoubleHashingHashMap(loadFactor);
+    }
+
+    @Override
+    protected OpenAddressHashMap getOpenAddressHashMap(int capacity, double loadFactor) {
+        return new DoubleHashingHashMap(capacity, loadFactor);
+    }
 }

@@ -13,4 +13,14 @@ public class LinearProbingHashMapTest extends OpenAddressHashMapTest {
     public OpenAddressHashMap getOpenAddressHashMap(int capacity) {
         return new LinearProbingHashMap(capacity);
     }
+
+    @Override
+    protected OpenAddressHashMap getOpenAddressHashMap(double loadFactor) {
+        return new LinearProbingHashMap(loadFactor);
+    }
+
+    @Override
+    protected OpenAddressHashMap getOpenAddressHashMap(int capacity, double loadFactor) {
+        return new LinearProbingHashMap(capacity, loadFactor);
+    }
 }

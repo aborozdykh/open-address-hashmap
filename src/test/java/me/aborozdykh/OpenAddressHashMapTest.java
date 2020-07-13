@@ -13,6 +13,10 @@ public abstract class OpenAddressHashMapTest {
 
     protected abstract OpenAddressHashMap getOpenAddressHashMap(int capacity);
 
+    protected abstract OpenAddressHashMap getOpenAddressHashMap(double loadFactor);
+
+    protected abstract OpenAddressHashMap getOpenAddressHashMap(int capacity, double loadFactor);
+
     @Test
     public void putAndGetOk() {
         var openAddressHashMap = getOpenAddressHashMap();
@@ -123,6 +127,18 @@ public abstract class OpenAddressHashMapTest {
         }
     }
 
+    @Test
+    public void putManyGetOneWithBigCapacity() {
+        int bigCapacity = 50_000_000;
+        var openAddressHashMap = getOpenAddressHashMap();
+        for (int i = 0; i <= bigCapacity; i++) {
+            openAddressHashMap.put(i, i);
+        }
+        long actualValue = openAddressHashMap.get(25_000_000);
+        Assert.assertEquals("Test failed! Expected value " + 25_000_000 + ", but was "
+                + actualValue, 25_000_000, actualValue);
+    }
+
     @Test(expected = WrongKeyException.class)
     public void putFreeCellMarkerAsKey() {
         var openAddressHashMap = getOpenAddressHashMap();
@@ -183,6 +199,30 @@ public abstract class OpenAddressHashMapTest {
     @Test
     public void getSizeAfterResizeOk() {
         var openAddressHashMap = getOpenAddressHashMap();
+        int expectedSize = 25;
+        for (int i = 0; i < expectedSize; i++) {
+            openAddressHashMap.put(i, i);
+        }
+        long actualSize = openAddressHashMap.size();
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+    }
+
+    @Test
+    public void getSizeAfterResizeWithCustomLoadFactorOk() {
+        var openAddressHashMap = getOpenAddressHashMap(0.5);
+        int expectedSize = 25;
+        for (int i = 0; i < expectedSize; i++) {
+            openAddressHashMap.put(i, i);
+        }
+        long actualSize = openAddressHashMap.size();
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+    }
+
+    @Test
+    public void getSizeAfterResizeWithCustomLoadFactorAndCustomCapacityOk() {
+        var openAddressHashMap = getOpenAddressHashMap(32, 0.5);
         int expectedSize = 25;
         for (int i = 0; i < expectedSize; i++) {
             openAddressHashMap.put(i, i);
