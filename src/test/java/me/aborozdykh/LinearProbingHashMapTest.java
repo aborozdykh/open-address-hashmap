@@ -6,13 +6,11 @@ package me.aborozdykh;
 public class LinearProbingHashMapTest extends OpenAddressHashMapTest {
     @Override
     public OpenAddressHashMap getOpenAddressHashMap() {
-        OpenAddressHashMap openAddressHashMap = new LinearProbingHashMap();
-        return openAddressHashMap;
+        return new LinearProbingHashMap();
     }
 
     @Override
     public OpenAddressHashMap getOpenAddressHashMap(int capacity) {
-        OpenAddressHashMap openAddressHashMap = new LinearProbingHashMap();
-        return openAddressHashMap;
+        return new LinearProbingHashMap(capacity);
     }
 }

@@ -6,13 +6,11 @@ package me.aborozdykh;
 public class DoubleHashingHashMapTest extends OpenAddressHashMapTest {
     @Override
     public OpenAddressHashMap getOpenAddressHashMap() {
-        OpenAddressHashMap openAddressHashMap = new DoubleHashingHashMap();
-        return openAddressHashMap;
+        return new DoubleHashingHashMap();
     }
 
     @Override
     public OpenAddressHashMap getOpenAddressHashMap(int capacity) {
-        OpenAddressHashMap openAddressHashMap = new DoubleHashingHashMap();
-        return openAddressHashMap;
+        return new DoubleHashingHashMap(capacity);
     }
 }
