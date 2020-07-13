@@ -1,5 +1,7 @@
-import exception.NoSuchElementException;
-import exception.WrongKeyException;
+package me.aborozdykh;
+
+import me.aborozdykh.exception.NoSuchElementException;
+import me.aborozdykh.exception.WrongKeyException;
 import org.junit.Assert;
 import org.junit.Test;
 

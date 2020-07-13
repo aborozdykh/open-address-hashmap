@@ -1,11 +1,13 @@
-import exception.NoSuchElementException;
-import exception.WrongKeyException;
+package me.aborozdykh;
+
 import java.util.Arrays;
+import me.aborozdykh.exception.NoSuchElementException;
+import me.aborozdykh.exception.WrongKeyException;
 
 /**
  * @author Andrii Borozdykh
  */
-public class DoubleHashingHashMap implements OpenAddressHashMap {
+public class LinearProbingHashMap implements OpenAddressHashMap {
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_LOAD_FACTOR = 0.75;
     private static final int RESIZE_MULTIPLIER = 2;
@@ -14,14 +16,14 @@ public class DoubleHashingHashMap implements OpenAddressHashMap {
     private int[] keys;
     private long[] values;
 
-    public DoubleHashingHashMap() {
+    public LinearProbingHashMap() {
         this.size = 0;
         this.keys = new int[DEFAULT_CAPACITY];
         this.values = new long[DEFAULT_CAPACITY];
         Arrays.fill(keys, FREE_CELL);
     }
 
-    public DoubleHashingHashMap(int capacity) {
+    public LinearProbingHashMap(int capacity) {
         this.size = 0;
         this.keys = new int[capacity];
         this.values = new long[capacity];
@@ -36,40 +38,41 @@ public class DoubleHashingHashMap implements OpenAddressHashMap {
         if (size >= DEFAULT_LOAD_FACTOR * hashMapCapacity()) {
             resize();
         }
-        for (int i = 0; i < hashMapCapacity(); i++) {
-            int index = hash(key, i);
-            if (keys[index] == FREE_CELL) {
-                keys[index] = key;
+        for (int i = hash(key); ; i++) {
+            if (i == hashMapCapacity()) {
+                i = 0;
+            }
+            if (keys[i] == FREE_CELL) {
+                keys[i] = key;
                 size++;
             }
-            if (keys[index] == key) {
-                values[index] = value;
+            if (keys[i] == key) {
+                values[i] = value;
                 return;
             }
         }
     }
 
     public long get(int key) {
-        for (int i = 0; i < hashMapCapacity(); i++) {
-            int index = hash(key, i);
-            if (keys[index] == FREE_CELL) {
+        for (int i = hash(key); ; i++) {
+            if (i == hashMapCapacity()) {
+                i = 0;
+            }
+            if (keys[i] == FREE_CELL) {
                 throw new NoSuchElementException("No such key!");
             }
-            if (keys[index] == key) {
-                return values[index];
+            if (keys[i] == key) {
+                return values[i];
             }
         }
-        throw new NoSuchElementException("No such key!");
     }
 
     public long size() {
         return size;
     }
 
-    private int hash(int key, int i) {
-        int hashFirst = Math.abs(key) % hashMapCapacity();
-        int hashSecond = (Math.abs(key) % (hashMapCapacity() - 1)) + 1;
-        return (hashFirst + i * hashSecond) % hashMapCapacity();
+    private int hash(int key) {
+        return Math.abs(key) % hashMapCapacity();
     }
 
     private int hashMapCapacity() {
