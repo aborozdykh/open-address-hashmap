@@ -13,6 +13,10 @@ public abstract class OpenAddressHashMapTest {
 
     protected abstract OpenAddressHashMap getOpenAddressHashMap(int capacity);
 
+    protected abstract OpenAddressHashMap getOpenAddressHashMap(double loadFactor);
+
+    protected abstract OpenAddressHashMap getOpenAddressHashMap(int capacity, double loadFactor);
+
     @Test
     public void putAndGetOk() {
         var openAddressHashMap = getOpenAddressHashMap();
@@ -20,14 +24,18 @@ public abstract class OpenAddressHashMapTest {
         openAddressHashMap.put(38, 1);
         openAddressHashMap.put(24, 6);
         openAddressHashMap.put(31, 7);
-        long FirstActualValue = openAddressHashMap.get(0);
-        long SecondActualValue = openAddressHashMap.get(38);
-        long ThirdActualValue = openAddressHashMap.get(24);
-        long FourthActualValue = openAddressHashMap.get(31);
-        Assert.assertEquals("Test failed! Expected value " + 0 + ", but was " + FirstActualValue, 0, FirstActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was " + SecondActualValue, 1, SecondActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 6 + ", but was " + ThirdActualValue, 6, ThirdActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 7 + ", but was " + FourthActualValue, 7, FourthActualValue);
+        long firstActualValue = openAddressHashMap.get(0);
+        long secondActualValue = openAddressHashMap.get(38);
+        long thirdActualValue = openAddressHashMap.get(24);
+        long fourthActualValue = openAddressHashMap.get(31);
+        Assert.assertEquals("Test failed! Expected value " + 0 + ", but was "
+                + firstActualValue, 0, firstActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was "
+                + secondActualValue, 1, secondActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 6 + ", but was "
+                + thirdActualValue, 6, thirdActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 7 + ", but was "
+                + fourthActualValue, 7, fourthActualValue);
     }
 
     @Test
@@ -36,12 +44,15 @@ public abstract class OpenAddressHashMapTest {
         openAddressHashMap.put(38, 1);
         openAddressHashMap.put(-38, 4);
         openAddressHashMap.put(-54, 5);
-        long FirstActualValue = openAddressHashMap.get(38);
-        long SecondActualValue = openAddressHashMap.get(-38);
-        long ThirdActualValue = openAddressHashMap.get(-54);
-        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was " + FirstActualValue, 1, FirstActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 4 + ", but was " + SecondActualValue, 4, SecondActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 5 + ", but was " + ThirdActualValue, 5, ThirdActualValue);
+        long firstActualValue = openAddressHashMap.get(38);
+        long secondActualValue = openAddressHashMap.get(-38);
+        long thirdActualValue = openAddressHashMap.get(-54);
+        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was "
+                + firstActualValue, 1, firstActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 4 + ", but was "
+                + secondActualValue, 4, secondActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 5 + ", but was "
+                + thirdActualValue, 5, thirdActualValue);
     }
 
     @Test
@@ -51,10 +62,12 @@ public abstract class OpenAddressHashMapTest {
         openAddressHashMap.put(38, 1);
         openAddressHashMap.put(0, 100);
         openAddressHashMap.put(38, 107);
-        long FirstActualValue = openAddressHashMap.get(0);
-        long SecondActualValue = openAddressHashMap.get(38);
-        Assert.assertEquals("Test failed! Expected value " + 100 + ", but was " + FirstActualValue, 100, FirstActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 107 + ", but was " + SecondActualValue, 107, SecondActualValue);
+        long firstActualValue = openAddressHashMap.get(0);
+        long secondActualValue = openAddressHashMap.get(38);
+        Assert.assertEquals("Test failed! Expected value " + 100 + ", but was "
+                + firstActualValue, 100, firstActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 107 + ", but was "
+                + secondActualValue, 107, secondActualValue);
     }
 
     @Test
@@ -64,14 +77,18 @@ public abstract class OpenAddressHashMapTest {
         openAddressHashMap.put(39, 2);
         openAddressHashMap.put(54, 3);
         openAddressHashMap.put(-38, 4);
-        long FirstActualValue = openAddressHashMap.get(38);
-        long SecondActualValue = openAddressHashMap.get(39);
-        long ThirdActualValue = openAddressHashMap.get(54);
-        long FourthActualValue = openAddressHashMap.get(-38);
-        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was " + FirstActualValue, 1, FirstActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 2 + ", but was " + SecondActualValue, 2, SecondActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 3 + ", but was " + ThirdActualValue, 3, ThirdActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 4 + ", but was " + FourthActualValue, 4, FourthActualValue);
+        long firstActualValue = openAddressHashMap.get(38);
+        long secondActualValue = openAddressHashMap.get(39);
+        long thirdActualValue = openAddressHashMap.get(54);
+        long fourthActualValue = openAddressHashMap.get(-38);
+        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was "
+                + firstActualValue, 1, firstActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 2 + ", but was "
+                + secondActualValue, 2, secondActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 3 + ", but was "
+                + thirdActualValue, 3, thirdActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 4 + ", but was "
+                + fourthActualValue, 4, fourthActualValue);
     }
 
     @Test
@@ -81,14 +98,18 @@ public abstract class OpenAddressHashMapTest {
         openAddressHashMap.put(38, 1);
         openAddressHashMap.put(24, 6);
         openAddressHashMap.put(31, 7);
-        long FirstActualValue = openAddressHashMap.get(0);
-        long SecondActualValue = openAddressHashMap.get(38);
-        long ThirdActualValue = openAddressHashMap.get(24);
-        long FourthActualValue = openAddressHashMap.get(31);
-        Assert.assertEquals("Test failed! Expected value " + 0 + ", but was " + FirstActualValue, 0, FirstActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was " + SecondActualValue, 1, SecondActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 6 + ", but was " + ThirdActualValue, 6, ThirdActualValue);
-        Assert.assertEquals("Test failed! Expected value " + 7 + ", but was " + FourthActualValue, 7, FourthActualValue);
+        long firstActualValue = openAddressHashMap.get(0);
+        long secondActualValue = openAddressHashMap.get(38);
+        long thirdActualValue = openAddressHashMap.get(24);
+        long fourthActualValue = openAddressHashMap.get(31);
+        Assert.assertEquals("Test failed! Expected value " + 0 + ", but was "
+                + firstActualValue, 0, firstActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 1 + ", but was "
+                + secondActualValue, 1, secondActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 6 + ", but was "
+                + thirdActualValue, 6, thirdActualValue);
+        Assert.assertEquals("Test failed! Expected value " + 7 + ", but was "
+                + fourthActualValue, 7, fourthActualValue);
     }
 
     @Test
@@ -100,9 +121,23 @@ public abstract class OpenAddressHashMapTest {
         }
         for (int i = 0; i <= bigCapacity; i++) {
             long actualValue = openAddressHashMap.get(i);
-            Assert.assertEquals("Test failed! Expected value " + i + ", but was " + actualValue, i, actualValue);
+            Assert.assertEquals("Test failed! Expected value " + i + ", but was "
+                    + actualValue, i, actualValue);
 
         }
+    }
+
+    @Test
+    public void putManyGetOneWithBigCapacity() {
+        int bigCapacity = 50_000_000;
+        var openAddressHashMap = getOpenAddressHashMap();
+        for (int i = 0; i <= bigCapacity; i++) {
+            openAddressHashMap.put(i, i);
+        }
+        long actualValue = openAddressHashMap.get(25_000_000);
+        Assert.assertEquals("Test failed! Expected value " + 25_000_000 + ", but was "
+                
+                + actualValue, 25_000_000, actualValue);
     }
 
     @Test(expected = WrongKeyException.class)
@@ -122,40 +157,44 @@ public abstract class OpenAddressHashMapTest {
         var openAddressHashMap = getOpenAddressHashMap();
         int expectedSize = 0;
         long actualSize = openAddressHashMap.size();
-        Assert.assertEquals("Test failed! The size isn't correct. Expected " + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
     }
 
     @Test
     public void getSizeWithCollisionOk() {
         var openAddressHashMap = getOpenAddressHashMap();
-        int expectedSize = 3;
         openAddressHashMap.put(38, 1);
         openAddressHashMap.put(-38, 4);
         openAddressHashMap.put(-54, 5);
         long actualSize = openAddressHashMap.size();
-        Assert.assertEquals("Test failed! The size isn't correct. Expected " + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+        int expectedSize = 3;
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
     }
 
     @Test
     public void getSizeWithCollisionAtZeroPositionOk() {
         var openAddressHashMap = getOpenAddressHashMap();
-        int expectedSize = 3;
         openAddressHashMap.put(0, 0);
         openAddressHashMap.put(-38, 4);
         openAddressHashMap.put(32, 9);
         long actualSize = openAddressHashMap.size();
-        Assert.assertEquals("Test failed! The size isn't correct. Expected " + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+        int expectedSize = 3;
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
     }
 
     @Test
     public void getSizeWithCollisionAtLastPositionOk() {
         var openAddressHashMap = getOpenAddressHashMap();
-        int expectedSize = 3;
         openAddressHashMap.put(31, 7);
         openAddressHashMap.put(79, 8);
         openAddressHashMap.put(0, 0);
         long actualSize = openAddressHashMap.size();
-        Assert.assertEquals("Test failed! The size isn't correct. Expected " + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+        int expectedSize = 3;
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
     }
 
     @Test
@@ -166,7 +205,32 @@ public abstract class OpenAddressHashMapTest {
             openAddressHashMap.put(i, i);
         }
         long actualSize = openAddressHashMap.size();
-        Assert.assertEquals("Test failed! The size isn't correct. Expected " + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+    }
+
+    @Test
+    public void getSizeAfterResizeWithCustomLoadFactorOk() {
+        var openAddressHashMap = getOpenAddressHashMap(0.5);
+        int expectedSize = 25;
+        for (int i = 0; i < expectedSize; i++) {
+            openAddressHashMap.put(i, i);
+        }
+        long actualSize = openAddressHashMap.size();
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
+    }
+
+    @Test
+    public void getSizeAfterResizeWithCustomLoadFactorAndCustomCapacityOk() {
+        var openAddressHashMap = getOpenAddressHashMap(32, 0.5);
+        int expectedSize = 25;
+        for (int i = 0; i < expectedSize; i++) {
+            openAddressHashMap.put(i, i);
+        }
+        long actualSize = openAddressHashMap.size();
+        Assert.assertEquals("Test failed! The size isn't correct. Expected "
+                + expectedSize + ", but was " + actualSize, expectedSize, actualSize);
     }
 
     @Test(expected = NoSuchElementException.class)

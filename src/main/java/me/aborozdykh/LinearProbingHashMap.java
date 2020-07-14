@@ -15,11 +15,13 @@ public class LinearProbingHashMap implements OpenAddressHashMap {
     private long size;
     private int[] keys;
     private long[] values;
+    private final double loadFactor;
 
     public LinearProbingHashMap() {
         this.size = 0;
         this.keys = new int[DEFAULT_CAPACITY];
         this.values = new long[DEFAULT_CAPACITY];
+        this.loadFactor = DEFAULT_LOAD_FACTOR;
         Arrays.fill(keys, FREE_CELL);
     }
 
@@ -27,6 +29,23 @@ public class LinearProbingHashMap implements OpenAddressHashMap {
         this.size = 0;
         this.keys = new int[capacity];
         this.values = new long[capacity];
+        this.loadFactor = DEFAULT_LOAD_FACTOR;
+        Arrays.fill(keys, FREE_CELL);
+    }
+
+    public LinearProbingHashMap(double loadFactor) {
+        this.size = 0;
+        this.keys = new int[DEFAULT_CAPACITY];
+        this.values = new long[DEFAULT_CAPACITY];
+        this.loadFactor = loadFactor;
+        Arrays.fill(keys, FREE_CELL);
+    }
+
+    public LinearProbingHashMap(int capacity, double loadFactor) {
+        this.size = 0;
+        this.keys = new int[capacity];
+        this.values = new long[capacity];
+        this.loadFactor = loadFactor;
         Arrays.fill(keys, FREE_CELL);
     }
 
@@ -35,7 +54,7 @@ public class LinearProbingHashMap implements OpenAddressHashMap {
             throw new WrongKeyException("Key " + FREE_CELL
                     + "is reserved. Please try to use another key.");
         }
-        if (size >= DEFAULT_LOAD_FACTOR * hashMapCapacity()) {
+        if (size >= loadFactor * hashMapCapacity()) {
             resize();
         }
         for (int i = hash(key); ; i++) {
