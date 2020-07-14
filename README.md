@@ -28,7 +28,7 @@ Each implementation has following public methods:
     - get(int key);
     - size();
 
-If the HashMap is 75% full, it will be resized.
+By default, if the HashMap is 75% full, it will be resized. It is possible to set a custom load factor when creating HashMap.
 
 Linear probing implementation uses only one hash function:
 
