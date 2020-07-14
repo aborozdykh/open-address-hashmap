@@ -12,7 +12,7 @@ This test case contains two implementations of open addressing HashMap with int 
     
 There are two types of open addressing HashMap's implementation in this test case. The first one uses linear probing for collision resolution, and the second one uses double hashing.
 
-There are two types of constructors in each implementation: the first one is without parameters (default constructor), and the second one is with custom capacity.
+There are four types of constructors in each implementation: the first one is without parameters (default constructor), the second one is with custom capacity, the third one is with custom load factor, and the last one is with custom capacity and custom load factor.
 
 Each implementation has following parameters by default:
 
